@@ -10,9 +10,8 @@ print("Hold a tag near the reader")
 try:
     while True:
         tag = reader.read()
-        if tag:
-            print(tag['id'])
-            print(tag['text'])
+        print(tag['id'])
+        print(tag['text'])
 
 finally:
     print("cleaning up")
