@@ -2,7 +2,6 @@
 
 import RPi.GPIO as GPIO
 import SimpleMFRC522
-import time
 
 reader = SimpleMFRC522.SimpleMFRC522()
 
@@ -18,5 +17,3 @@ try:
 finally:
     print("cleaning up")
     GPIO.cleanup()
-
-GPIO.cleanup()
