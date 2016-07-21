@@ -1,5 +1,6 @@
 # Modified from: https://github.com/mxgxw/MFRC522-python/blob/master/MFRC522.py
 # Trace commented out and the Read and Write methods modified to return values.
+# Also changed to use the Broadcom pin mode
 
 import RPi.GPIO as GPIO
 import spi
@@ -7,7 +8,7 @@ import signal
 import time
   
 class MFRC522:
-  NRSTPD = 22
+  NRSTPD = 25
   
   MAX_LEN = 16
   
@@ -109,8 +110,8 @@ class MFRC522:
   
   def __init__(self, dev='/dev/spidev0.0', spd=1000000):
     spi.openSPI(device=dev,speed=spd)
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(22, GPIO.OUT)
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(25, GPIO.OUT)
     GPIO.output(self.NRSTPD, 1)
     self.MFRC522_Init()
   
