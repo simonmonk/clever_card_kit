@@ -16,15 +16,16 @@ So, you will either need to get the original and modify spi.c yourself, or use m
 
 This library assumes that the reader is connected to your Raspberry Pi in what seems to be the standard configuration of:
 
-Lead color|Smartcard Reader|Raspberry Pi pin
-Purple|SDA|8
-Orange|SCK|11
-Yellow|MOSI|10
-White|MISO|9
-Green|IRQ|Not connected
-Black|GND|GND
-Gray|RST|25
-Red|3.3V|3.3V
+|Lead color|Smartcard Reader|Raspberry Pi pin|
+|----------|----------------|----------------|
+|Purple|SDA|8|
+|Orange|SCK|11|
+|Yellow|MOSI|10|
+|White|MISO|9|
+|Green|IRQ|Not connected|
+|Black|GND|GND|
+|Gray|RST|25|
+|Red|3.3V|3.3V|
 
 
 # API
