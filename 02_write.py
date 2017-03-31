@@ -8,8 +8,9 @@ reader = SimpleMFRC522.SimpleMFRC522()
 try:
     while True:
         text = raw_input('New Text: ')
+        sector = raw_input('Sector: ')
         print("Now scan a tag to write")
-        tag = reader.write(8, text) 
+        tag = reader.write(text, sector) 
         
         print("written")
         print(tag['id'])

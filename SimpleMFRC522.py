@@ -16,7 +16,7 @@ class SimpleMFRC522:
           tag = self.read_no_block()  
       return tag
   
-  def read_no_block(self):
+  def read_no_block(self, sector=8):
     (status, TagType) = self.READER.MFRC522_Request(self.READER.PICC_REQIDL)
     if status != self.READER.MI_OK:
         return None
@@ -25,9 +25,9 @@ class SimpleMFRC522:
         return None
     self.TAG['id'] = self.uid_to_num(uid)
     self.READER.MFRC522_SelectTag(uid)
-    status = self.READER.MFRC522_Auth(self.READER.PICC_AUTHENT1A, 8, self.KEY, uid)
+    status = self.READER.MFRC522_Auth(self.READER.PICC_AUTHENT1A, sector, self.KEY, uid)
     if status == self.READER.MI_OK:
-         text = self.READER.MFRC522_Read(8)
+         text = self.READER.MFRC522_Read(sector)
          if text:
              self.TAG['text'] = ''.join(chr(i) for i in text)
     self.READER.MFRC522_StopCrypto1()
@@ -35,10 +35,10 @@ class SimpleMFRC522:
     
 
     
-  def write(self, sector, text):
-      tag = self.write_no_block(8, text)        
+  def write(self, text, sector=8):
+      tag = self.write_no_block(sector, text)        
       while not tag:
-          tag = self.write_no_block(8, text)  
+          tag = self.write_no_block(sector, text)  
       return tag
 
 
@@ -52,12 +52,12 @@ class SimpleMFRC522:
       self.TAG['id'] = self.uid_to_num(uid)
       self.READER.MFRC522_SelectTag(uid)
       status = self.READER.MFRC522_Auth(self.READER.PICC_AUTHENT1A, 8, self.KEY, uid)
-      self.READER.MFRC522_Read(8)
+      self.READER.MFRC522_Read(sector)
       if status == self.READER.MI_OK:
           data = bytearray()
           data.extend(text.ljust(16))
-          self.READER.MFRC522_Write(8, data)
-          text = self.READER.MFRC522_Read(8)
+          self.READER.MFRC522_Write(sector, data)
+          text = self.READER.MFRC522_Read(sector)
           if text:
               self.TAG['text'] = ''.join(chr(i) for i in text)
       self.READER.MFRC522_StopCrypto1()

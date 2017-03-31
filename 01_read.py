@@ -9,7 +9,8 @@ print("Hold a tag near the reader")
 
 try:
     while True:
-        tag = reader.read()
+        sector = raw_input('Sector: ')
+        tag = reader.read(sector)
         print(tag['id'])
         print(tag['text'])
 
