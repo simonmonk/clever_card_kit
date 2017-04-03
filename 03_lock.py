@@ -17,12 +17,13 @@ allowed_tags = []
 def handle_listen_mode():
     global mode, allowed_tags
     led.set_color(GREEN)
-    id, text = reader.read_id_no_block()
-    if id in allowed_tags:
+    id = reader.read_id_no_block()
+    if id != None:
+        if id in allowed_tags:
             unlock_door()
-    else:
-        print("Unknown Tag")
-        flash(RED, 5, 0.1)
+        else:
+            print("Unknown Tag")
+            flash(RED, 5, 0.1)
     if button.is_pressed():
         print("pressed")
         mode = 'GRANT'
@@ -31,7 +32,7 @@ def handle_grant_mode():
     global mode, allowed_tags
     led.set_color(CYAN)
     id = reader.read_id_no_block()
-    if id not in allowed_tags:
+    if id != None and id not in allowed_tags:
         allowed_tags.append(id)
         save_tags()
         flash(GREEN, 1, 0.1)
@@ -42,7 +43,7 @@ def handle_revoke_mode():
     global mode
     led.set_color(PURPLE)
     id = reader.read_id_no_block()
-    if id in allowed_tags:
+    if id != None and id in allowed_tags:
         allowed_tags.remove(id)
         save_tags()
         flash(PURPLE, 1, 0.1)

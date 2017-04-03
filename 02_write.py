@@ -10,8 +10,8 @@ try:
         text = raw_input('New Text: ')
         print("Now scan a tag to write")
         id, text = reader.write(text) 
-        
         print("written")
+        
         print(id)
         print(text)
 finally:
