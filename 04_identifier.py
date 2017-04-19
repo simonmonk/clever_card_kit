@@ -14,9 +14,9 @@ def speak(message):
 try:
     while True:
         speak('Hold a thing next to the reader')
-        tag = reader.read()
-        print(tag['text'])
-        speak(tag['text'])
+        id, text = reader.read()
+        print(text)
+        speak(text)
 
 finally:
     print("cleaning up")
