@@ -96,6 +96,8 @@ This function is like 'read_no_block' but only returns the id, ignoring any text
 ```
 id = reader.read_id_no_block()
 print(id)
+```
+
 
 ## write_no_block(text)
 
