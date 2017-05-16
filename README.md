@@ -40,55 +40,73 @@ reader = SimpleMFRC522.SimpleMFRC522()
 
 ## read()
 
-This function takes no parameters and just waits for a card to be presented to the reader. It then returns a dict with two keys: id (the card id) and text (the 16 characters stored in sector 8 of the card)
+This function takes no parameters and waits for a card to be presented to the reader. It then returns two values: id (the card id) and text (the 48 characters stored in sector 8 of the card)
 
 ```
-tag = reader.read()
-print(tag['id'])
-print(tag['text'])
+id, text = reader.read()
+print(id)
+print(text)
 ```
 
+
+## read_id()
+
+This function is like 'read' but only returns the id, ignoring any text stored on the card.
+
+```
+id = reader.read_id()
+print(id)
+```
 
 
 ## write(text)
 
-This function takes a text string and just waits for a card to be presented to the reader. It then writes the first 16 characters of text (padding if needed) to sector 8 of the card. It then returns a dict with two keys: id (the card id) and text (the 16 characters stored in sector 8 of the card)
+This function takes a text string and just waits for a card to be presented to the reader. It then writes the first 48 characters of text (padding if needed) to sector 8 of the card. It then returns the id and text that were just written.
 
 
 ```
 text = raw_input('New Text: ')
 print("Now scan a tag to write")
-tag = reader.write(8, text) 
+id, text = reader.write(text) 
 print("written")
-print(tag['id'])
-print(tag['text'])
+print(id)
+print(text)
 ```
 
 
 ## read_no_block()
 
-This function takes no parameters and if no card is being presented to the reader immediately returns None. If a card is on the reader, then it returns a dict with two keys: id (the card id) and text (the 16 characters stored in sector 8 of the card)
+This function takes no parameters and if no card is being presented to the reader immediately returns two values None and None, indicating that no id or text were read. If a card is on the reader, then it returns two values: id (the card id) and text (the 48 characters stored in sector 8 of the card)
 
 The code example below would normally be in a loop.
 
 ```
-tag = reader.read_no_block()
-if tag:
-    id = tag['id']
+id, text = reader.read_no_block()
+if id:
     print(id)
 ```
 
+
+
+
+## read_id_no_block()
+
+This function is like 'read_no_block' but only returns the id, ignoring any text stored on the card. If there is no card present, None is returned.
+
+```
+id = reader.read_id_no_block()
+print(id)
 
 ## write_no_block(text)
 
-This function takes a text string and if no card is being presented to the reader immediately returns None. If a card is on the reader, then it writes the text string to sector 8 of the card and returns a dict with two keys: id (the card id) and text (the 16 characters stored in sector 8 of the card)
+This function takes a text string and if no card is being presented to the reader immediately returns None, None. If a card is on the reader, then it writes the text string to sector 8 of the card and returns two values: id (the card id) and text (the 48 characters stored in sector 8 of the card)
 
 The code example below would normally be in a loop.
 
 ```
-tag = reader.write_no_block('hello')
-if tag:
-    id = tag['id']
+id, text = reader.write_no_block('hello')
+if id:
     print(id)
+    print(text)
 ```
 
