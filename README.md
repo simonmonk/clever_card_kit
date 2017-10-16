@@ -1,5 +1,7 @@
-# clever_card_kit
-This is where you will find the source code for the Python programs used in the MonkMakes Smartcard Kit for Raspberry Pi (https://monkmakes.com/cck)
+# clever_card_kit - MonkMakes Clever Card Kit for Raspberry Pi
+This is where you will find the source code for the Python programs used in the [MonkMakes Clever Card Kit for Raspberry Pi] (https://monkmakes.com/cck)
+
+![MonkMakes Clever Card Kit for Raspberry Pi](https://www.monkmakes.com/wp-content/uploads/2017/04/kit-copy.jpg)
 
 Feel free to make use of this code with any project that uses an RC-522 tag reader/writer. The class SimpleMFRC522 reduces the process of reading from and writing to a card to just two functions called read and write! Actually its a little more complicated than that, because read and write both block and wait for a card to be presented, and sometimes you need to be doing other stuff in your program while you wait for a tag to be scanned. So, there are also two extra functions read_no_block and write_no_block.
 
