@@ -1,5 +1,6 @@
 import MFRC522
 import RPi.GPIO as GPIO
+import time
   
 class SimpleMFRC522:
 
@@ -47,9 +48,9 @@ class SimpleMFRC522:
         if data:
              text_read = ''.join(chr(i) for i in data)
     self.READER.MFRC522_StopCrypto1()
+    time.sleep(0.1)
     return id, text_read
     
-
     
   def write(self, text):
       id, text_in = self.write_no_block(text)        
@@ -77,6 +78,7 @@ class SimpleMFRC522:
             self.READER.MFRC522_Write(block_num, data[(i*16):(i+1)*16])
             i += 1
       self.READER.MFRC522_StopCrypto1()
+      time.sleep(0.1)
       return id, text[0:(len(self.BLOCK_ADDRS) * 16)]
       
   def uid_to_num(self, uid):
