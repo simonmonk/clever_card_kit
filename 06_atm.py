@@ -11,8 +11,9 @@ def read_tag():
     id, text = reader.read()
     if id:
         values = text.split("/")
-        name_field.set(values[0])
-        balance_field.set(values[1])
+        if len(values) == 2:
+            name_field.set(values[0])
+            balance_field.set(values[1])
         
 def write_tag():
     name = name_field.get()
