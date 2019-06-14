@@ -13,6 +13,17 @@ This fork of SPI-Py made to change the line cs_change to 0 not 1 in spi.c to all
 
 So, you will either need to get the original and modify spi.c yourself, or use my fork here: https://github.com/simonmonk/SPI-Py
 
+# Installation
+Type the following commands from your Raspberry Pi's terminal.
+
+```
+$ cd /home/pi
+$ git clone https://github.com/simonmonk/clever_card_kit.git
+$ cd clever_card_kit
+```
+
+This isn't a proper Python library, so you can't install it. But within this directory, you will find test programs to try out the reader.
+
 
 # Connecting up your Reader
 
