@@ -12,29 +12,33 @@ def read_tag():
     if id:
         values = text.split("/")
         if len(values) == 2:
-            name_field.set(values[0])
-            balance_field.set(values[1])
+            name_field.value = values[0]
+            balance_field.value = values[1]
         
 def write_tag():
-    name = name_field.get()
-    balance = float(balance_field.get())
-    adjustment = float(adjustment_field.get())
+    name = name_field.value
+    balance = float(balance_field.value)
+    adjustment = float(adjustment_field.value)
     balance += adjustment
     
     text = name + "/" + str(balance)
     reader.write(text)
-    balance_field.set(str(balance))
-    adjustment_field.set("0")
+    balance_field.value = str(balance)
+    adjustment_field.value = "0"
             
 PushButton(app, text="SCAN", command=read_tag, align="left", grid=[0,0])
 
-Text(app, text="Name", align="left", grid=[1,0])
+Text(app, text="Name", align="left", grid=[0,1])
 name_field = TextBox(app, text="-", align="left", width=20, grid=[1,1])
-Text(app, text="Balance", align="left", grid=[2,0])
-balance_field = TextBox(app, text="", align="left", width=10, grid=[2,1])
-Text(app, text="Amount to + or -", align="left", grid=[4,0])
-adjustment_field = TextBox(app, text="0", align="left", width=10, grid=[4,1])
+Text(app, text="Balance", align="left", grid=[0,2])
+balance_field = TextBox(app, text="", align="left", width=10, grid=[1,2])
+Text(app, text="Amount to + or -", align="left", grid=[0,3])
+adjustment_field = TextBox(app, text="0", align="left", width=10, grid=[1,3])
 
-PushButton(app, text="SAVE", command=write_tag, align="left", grid=[5,0])
+PushButton(app, text="SAVE", command=write_tag, align="left", grid=[0,4])
 
-app.display()
+try:
+    app.display()
+finally:
+    print("cleaning up")
+    GPIO.cleanup()

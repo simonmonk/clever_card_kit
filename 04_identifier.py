@@ -9,7 +9,10 @@ reader = SimpleMFRC522.SimpleMFRC522()
 print("Hold a thing next to the reader")
 
 def speak(message):
-    os.system('echo ' + message + ' | festival --tts')
+    try:
+        os.system('echo ' + message + ' | festival --tts')
+    except ValueError:
+         print("No message on card! Please add a message to the card before reading.")
 
 try:
     while True:
